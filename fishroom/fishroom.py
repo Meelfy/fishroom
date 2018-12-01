@@ -30,6 +30,21 @@ api_mgr = APIClientManager(redis_client)
 logger = get_logger("Fishroom")
 
 
+import requests 
+import urllib.request 
+
+def get_answer_from_meijie(sentence):
+    sentence = 'howareyou'.replace(' ','') 
+    sentence = urllib.request.pathname2url(sentence) 
+    url = "http://166.111.141.239:29521/?" + sentence 
+
+    response = requests.get(url) 
+    #for line in response.text.split("\n"): 
+    #    print(urllib.request.url2pathname(line))
+    anwser = ''.join([urllib.request.url2pathname(line) for line in response.text.split("\n")])
+    return anwser
+
+
 def load_plugins():
     from importlib import import_module
     for plugin in config['plugins']:
@@ -76,7 +91,7 @@ def main():
             return handler.func(cmd, *args, msg=msg, room=room)
         except:
             logger.exception("failed to execute command: {}".format(cmd))
-
+    bot_count = 0
     for msg in msgs_from_im.message_stream():
         logger.info(msg)
         if msg.room is None:
@@ -95,6 +110,12 @@ def main():
 
         # Handle commands
         bot_reply = ""
+        if msg.sender != config.get("name", "bot"):
+            #bot_reply = "bot_reply %d" %(bot_count)
+            bot_reply = get_answer_from_meijie(msg.content)
+            bot_count += 1
+            #pass
+        
         if msg.mtype == MessageType.Command:
             bot_reply = try_command(msg)
 
