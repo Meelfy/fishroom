@@ -34,7 +34,8 @@ import requests
 import urllib.request 
 
 def get_answer_from_meijie(sentence):
-    sentence = 'howareyou'.replace(' ','') 
+    sentence = sentence.replace(' ','')
+    print('meijie:%s'%sentence) 
     sentence = urllib.request.pathname2url(sentence) 
     url = "http://166.111.141.239:29521/?" + sentence 
 
@@ -110,11 +111,13 @@ def main():
 
         # Handle commands
         bot_reply = ""
-        if msg.sender != config.get("name", "bot"):
-            #bot_reply = "bot_reply %d" %(bot_count)
-            bot_reply = get_answer_from_meijie(msg.content)
-            bot_count += 1
-            #pass
+        try:
+            if msg.sender != config.get("bot_name", "夜刀神十香"):
+                #bot_reply = "bot_reply %d" %(bot_count)
+                bot_reply = get_answer_from_meijie(msg.content)
+                bot_count += 1
+        except:
+            pass
         
         if msg.mtype == MessageType.Command:
             bot_reply = try_command(msg)
@@ -124,7 +127,7 @@ def main():
             if isinstance(bot_reply, tuple) and len(bot_reply) == 2:
                 bot_reply, opt = bot_reply
             bot_msg = Message(
-                msg.channel, config.get("name", "bot"), msg.receiver,
+                msg.channel, config.get("bot_name", "夜刀神十香"), msg.receiver,
                 content=bot_reply, date=msg.date, time=msg.time,
                 botmsg=True, room=room, opt=opt
             )
