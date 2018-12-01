@@ -1,7 +1,7 @@
 config = {
     "debug": True,
     "timezone": "Asia/Shanghai",
-    "baseurl": "http://52.68.175.168:8000",  # do not end with "/"
+    "baseurl": "http://ivision.meijiex.vip",  # do not end with "/"
     "name": "ivision",
     "cmd_me": "tg_bot",  # username of the telegram bot
 
@@ -76,8 +76,8 @@ config = {
 
     # this is the web interface
     "chatlog": {
-        "host": "52.68.175.168",  # hostname for web server
-        "port": 8000,
+        "host": "ivision.meijiex.vip",  # hostname for web server
+        "port": 80,
         "default_channel": "ivision",
     },
 
@@ -97,18 +97,18 @@ config = {
     ],
 
     "bindings": {
-        "archlinux-cn": {
-            "irc": "#archlinux-cn",
-            "telegram": "-1001031857103",  # group id can be obtained using bot api
-            "xmpp": "chat@conference.xmpp.jp",
-            "matrix": "#archlinux:matrixim.cc"
-        },
-        "test": {
+        #"archlinux-cn": {
+        #    "irc": "#archlinux-cn",
+        #    "telegram": "-1001031857103",  # group id can be obtained using bot api
+        #    "xmpp": "chat@conference.xmpp.jp",
+        #    "matrix": "#archlinux:matrixim.cc"
+        #},
+        #"test": {
             # Use room nick name to identify a room
             # TODO: use Uins (https://itchat.readthedocs.io/zh/latest/intro/contact/#uins)
             # to identify a room, but currently I can"t get room Uins on login.
-            "wechat": "xxx chat room"
-        },
+        #    "wechat": "xxx chat room"
+        #},
 	"ivision":{
 	}
     }
