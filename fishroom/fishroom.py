@@ -112,7 +112,7 @@ def main():
         # Handle commands
         bot_reply = ""
         try:
-            if msg.sender != config.get("bot_name", "夜刀神十香"):
+            if msg.sender != config.get("bot_name", "小i"):
                 #bot_reply = "bot_reply %d" %(bot_count)
                 bot_reply = get_answer_from_meijie(msg.content)
                 bot_count += 1
@@ -127,7 +127,7 @@ def main():
             if isinstance(bot_reply, tuple) and len(bot_reply) == 2:
                 bot_reply, opt = bot_reply
             bot_msg = Message(
-                msg.channel, config.get("bot_name", "夜刀神十香"), msg.receiver,
+                msg.channel, config.get("bot_name", "小i"), msg.receiver,
                 content=bot_reply, date=msg.date, time=msg.time,
                 botmsg=True, room=room, opt=opt
             )
