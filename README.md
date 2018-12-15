@@ -1,3 +1,66 @@
+# 重新部署fishroom for ivision
+
+## 下载代码
+
+- HTTP
+```
+git clone https://github.com/georgethrax/fishroom.git
+cd fishroom
+```
+
+- SSH
+```
+git clone git@github.com:georgethrax/fishroom.git
+cd fishroom
+```
+
+## 安装依赖
+### 安装redis
+
+- CentOS
+```
+sudo yum install redis
+```
+
+- Ubuntu
+```
+sudo apt-get install redis-server
+# 或者 sudo apt-get install redis
+```
+
+**注意：redis默认监听6379端口**
+
+**如果仍然缺依赖，可以考虑安装以下依赖：**
+```
+apt-get install -y python3-dev python3-pip libmagic1 libjpeg-dev libpng-dev libwebp-dev zlib1g-dev gcc
+pip3 install --upgrade pip setuptools
+pip3 install -r requirements.txt
+```
+
+### 安装python库（要求python3.5, 3.6, 3.7)
+```
+pip install -r requirements.txt
+```
+
+
+## 修改配置
+在DNS解析中，将ivision.meijiex.vip的A记录修改为实际运行fishroom的形如166.111.x.x的公网ip地址
+
+## 启动进程
+```
+nohup redis-server > nohup.redis.out &
+nohup /home/lix/anaconda3/bin/python -m fishroom.fishroom > nohup.fishroom-core.out &
+sudo nohup /home/lix/anaconda3/bin/python -m fishroom.web > nohup.fishroom-web.out & #wechat app的安全限制，此处必须监听80端口
+```
+
+
+
+
+---
+以下为原fishroom工程的readme.md
+---
+
+
 # fishroom
 ![](https://img.shields.io/badge/license-AGPL-blue.svg)
 ![Proudly Powered by Python3](https://img.shields.io/badge/python-3.5-blue.svg)
